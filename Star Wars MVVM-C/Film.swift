@@ -10,6 +10,8 @@ import Foundation
 import ObjectMapper
 
 struct Film: StarWarsModel, Mappable {
+    var type: StarWarsType = .film
+    
     var title: String?
     var episode_id: String?
     var opening_crawl: String?

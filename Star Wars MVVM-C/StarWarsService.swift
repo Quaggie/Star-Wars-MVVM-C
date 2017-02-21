@@ -10,7 +10,12 @@ import Foundation
 import Moya
 
 enum StarWarsService {
-    case fetch
+    case fetchPeople(page: Int)
+    case fetchFilms(page: Int)
+    case fetchStarships(page: Int)
+    case fetchVehicles(page: Int)
+    case fetchSpecies(page: Int)
+    case fetchPlanets(page: Int)
 }
 
 extension StarWarsService: TargetType {
@@ -19,35 +24,38 @@ extension StarWarsService: TargetType {
     }
     var path: String {
         switch self {
-        case .fetch: return "/"
+        case .fetchPeople(_): return "/people"
+        case .fetchFilms(_): return "/films"
+        case .fetchStarships(_): return "/starships"
+        case .fetchVehicles(_): return "/vehicles"
+        case .fetchSpecies(_): return "/species"
+        case .fetchPlanets(_): return "/planets"
         }
     }
     var method: Moya.Method {
-        switch self {
-        case .fetch: return .get
-        }
+        return .get
     }
-    var parameters: [String : Any]? {
+    var parameters: [String: Any]? {
         switch self {
-        case .fetch: return nil
+        case .fetchFilms(let page), .fetchPeople(let page), .fetchStarships(let page), .fetchVehicles(let page), .fetchSpecies(let page), .fetchPlanets(let page):
+            return ["page": page]
         }
     }
     var parameterEncoding: ParameterEncoding {
-        switch self {
-        case .fetch: return URLEncoding.default
-        }
+        return URLEncoding.default
     }
     var sampleData: Data {
         switch self {
-        case .fetch: return "".utf8Encoded
+        case .fetchFilms(_), .fetchPeople(_), .fetchStarships(_), .fetchVehicles(_), .fetchSpecies(_), .fetchPlanets(_):
+            return "1".utf8Encoded
         }
     }
     var task: Task {
-        switch self {
-        case .fetch: return .request
-        }
+        return .request
     }
 }
+
+
 
 
 

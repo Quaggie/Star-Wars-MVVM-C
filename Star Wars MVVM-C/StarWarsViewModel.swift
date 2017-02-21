@@ -17,24 +17,26 @@ class StarWarsViewModel {
         }
     }
     var delegate: StarWarsViewModelDelegate?
-    let starWarsProvider = MoyaProvider<StarWarsService>()
     
     init (starWarsModel: StarWarsModel?) {
         self.starWarsModel = starWarsModel
-        fetch()
+        fetchFilms()
     }
     
-    func fetch () {
-        starWarsProvider.request(.fetch) { result in
-            switch result {
-            case .success(let response):
-                // TODO: 
-                print(response)
-                break
-            case .failure(let error):
-                print(error)
-                break
-            }
-        }
+    func fetchFilms (page: Int = 1, provider: MoyaProvider<StarWarsService> = MoyaProvider<StarWarsService>()) {
+//        provider.request(.fetchFilms(page: page)) { result in
+//            switch result {
+//            case .success(let response):
+//                do {
+//                    if let starWarsObject = try? response.mapObject(StarWarsObject<Film>.self) {
+//                        print(starWarsObject)
+//                    }
+//                }
+//                break
+//            case .failure(let error):
+//                print(error)
+//                break
+//            }
+//        }
     }
 }

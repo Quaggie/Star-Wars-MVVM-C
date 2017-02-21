@@ -10,6 +10,7 @@ import Foundation
 import ObjectMapper
 
 struct Specie: StarWarsModel, Mappable {
+    var type: StarWarsType = .specie
     
     var name: String?
     var classification: String?

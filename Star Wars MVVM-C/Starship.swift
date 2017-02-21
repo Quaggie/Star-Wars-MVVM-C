@@ -10,6 +10,7 @@ import Foundation
 import ObjectMapper
 
 struct Starship: StarWarsModel, Mappable {
+    var type: StarWarsType = .starship
     
     var name: String?
     var model: String?
