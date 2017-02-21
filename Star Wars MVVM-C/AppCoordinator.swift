@@ -20,8 +20,7 @@ class AppCoordinator: Coordinator {
     }
 
     func start () {
-        // let starWarsModel = StarWarsModel()
-        let starWarsViewModel = StarWarsViewModel(starWarsModel: nil)
+        let starWarsViewModel = StarWarsViewModel()
         let starWarsViewController = StarWarsViewController(starWarsViewModel: starWarsViewModel)
         navigationController?.pushViewController(starWarsViewController, animated: true)
     }

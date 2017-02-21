@@ -16,6 +16,10 @@ struct StarWarsObject<T: Mappable>: Mappable {
     var previous: String?
     var results: [T]?
     
+    init? () {
+        self.init()
+    }
+    
     init?(map: Map) {
         
     }

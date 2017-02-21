@@ -7,36 +7,76 @@
 //
 
 import Foundation
-import Moya
-import Moya_ObjectMapper
 
 class StarWarsViewModel {
-    var starWarsModel: StarWarsModel? {
+    
+    var isSearching = false
+    var page: Int = 1
+    var selectedType: StarWarsType = .person {
         didSet {
-            delegate?.loadedData()
+            delegate?.onTypeSelected(selectedType: selectedType)
+        }
+    }
+    
+    var data: Any? {
+        didSet {
+            guard let data = data else {
+                return
+            }
+            if let data = data as? StarWarsObject<Person> {
+                
+            }
+            if let data = data as? StarWarsObject<Film> {
+                
+            }
+            if let data = data as? StarWarsObject<Starship> {
+                
+            }
+            if let data = data as? StarWarsObject<Vehicle> {
+                
+            }
+            if let data = data as? StarWarsObject<Specie> {
+                
+            }
+            if let data = data as? StarWarsObject<Planet> {
+                
+            }
+            
+            delegate?.loadedData(data: data, finished: false)
         }
     }
     var delegate: StarWarsViewModelDelegate?
     
-    init (starWarsModel: StarWarsModel?) {
-        self.starWarsModel = starWarsModel
+    init () {
+        // Initialize the model?
         fetchFilms()
     }
     
-    func fetchFilms (page: Int = 1, provider: MoyaProvider<StarWarsService> = MoyaProvider<StarWarsService>()) {
-//        provider.request(.fetchFilms(page: page)) { result in
-//            switch result {
-//            case .success(let response):
-//                do {
-//                    if let starWarsObject = try? response.mapObject(StarWarsObject<Film>.self) {
-//                        print(starWarsObject)
-//                    }
-//                }
-//                break
-//            case .failure(let error):
-//                print(error)
-//                break
-//            }
-//        }
+    func fetchFilms () {
+        Api.shared.fetchFilms { result in
+            switch result {
+            case .success(let starWarsObject):
+                if let starWarsObject = starWarsObject {
+                    print(starWarsObject)
+                    self.data = starWarsObject
+                }
+                break
+            case .failure(let error):
+                // TODO: Show error
+                print(error)
+                break
+            }
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+

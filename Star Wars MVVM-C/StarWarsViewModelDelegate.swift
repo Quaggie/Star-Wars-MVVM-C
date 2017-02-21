@@ -9,5 +9,7 @@
 import Foundation
 
 protocol StarWarsViewModelDelegate: class {
-    func loadedData ()
+    func loadedData (data: Any?, finished: Bool)
+    func loadedNextPage(data: Any?, finished: Bool)
+    func onTypeSelected (selectedType: StarWarsType)
 }

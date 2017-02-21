@@ -11,10 +11,11 @@ import SwifterSwift
 
 class StarWarsViewController: UIViewController {
     
-    var isSearching = false
-    var selectedType: StarWarsType = .person
-    
-    var starWarsViewModel: StarWarsViewModel?
+    var starWarsViewModel: StarWarsViewModel? {
+        didSet {
+            starWarsViewModel?.delegate = self
+        }
+    }
     
     lazy var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
@@ -27,6 +28,7 @@ class StarWarsViewController: UIViewController {
         cv.backgroundColor = .clear
         cv.bounces = true
         cv.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+        cv.register(cellWithClass: UICollectionViewCell.self)
         return cv
     }()
     
@@ -52,22 +54,67 @@ extension StarWarsViewController: CodeBased {
 }
 
 extension StarWarsViewController: StarWarsViewModelDelegate {
-    func loadedData() {
+    func loadedData(data: Any?, finished: Bool) {
         collectionView.reloadData()
+    }
+    
+    func loadedNextPage(data: Any?, finished: Bool) {
+        // TODO
+    }
+    
+    func onTypeSelected(selectedType: StarWarsType) {
+        // Clear cells
+        // Start searching
+        // if typeOnCell == selectedType -> ScrollToTop
     }
 }
 
 // MARK: UICollectionViewDataSource
 extension StarWarsViewController: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 0
-    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if let data = starWarsViewModel?.data as? StarWarsObject<Person> {
+            return data.results?.count ?? 0
+        }
+        if let data = starWarsViewModel?.data as? StarWarsObject<Film> {
+            return data.results?.count ?? 0
+        }
+        if let data = starWarsViewModel?.data as? StarWarsObject<Starship> {
+            return data.results?.count ?? 0
+        }
+        if let data = starWarsViewModel?.data as? StarWarsObject<Vehicle> {
+            return data.results?.count ?? 0
+        }
+        if let data = starWarsViewModel?.data as? StarWarsObject<Specie> {
+            return data.results?.count ?? 0
+        }
+        if let data = starWarsViewModel?.data as? StarWarsObject<Planet> {
+            return data.results?.count ?? 0
+        }
+        
         return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let _ = starWarsViewModel?.data as? StarWarsObject<Person> {
+            
+        }
+        if let _ = starWarsViewModel?.data as? StarWarsObject<Film> {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "alou", for: indexPath)
+            cell.backgroundColor = .black
+            return cell
+        }
+        if let _ = starWarsViewModel?.data as? StarWarsObject<Starship> {
+            
+        }
+        if let _ = starWarsViewModel?.data as? StarWarsObject<Vehicle> {
+            
+        }
+        if let _ = starWarsViewModel?.data as? StarWarsObject<Specie> {
+            
+        }
+        if let _ = starWarsViewModel?.data as? StarWarsObject<Planet> {
+            
+        }
         return UICollectionViewCell()
     }
 }
