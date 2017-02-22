@@ -13,8 +13,14 @@ protocol CodeBased: class {
     func setupViews ()
 }
 
-extension CodeBased where Self:UICollectionViewCell {
-    var reuseId: String {
+extension CodeBased where Self: UICollectionViewCell {
+    static var reuseId: String {
+        return String(describing: self)
+    }
+}
+
+extension CodeBased where Self: UICollectionReusableView {
+    static var reuseId: String {
         return String(describing: self)
     }
 }

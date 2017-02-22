@@ -21,7 +21,8 @@ class AppCoordinator: Coordinator {
 
     func start () {
         let starWarsViewModel = StarWarsViewModel()
-        let starWarsViewController = StarWarsViewController(starWarsViewModel: starWarsViewModel)
+        let typeHeaderViewViewModel = TypeHeaderViewViewModel()
+        let starWarsViewController = StarWarsViewController(starWarsViewModel: starWarsViewModel, typeHeaderViewViewModel: typeHeaderViewViewModel)
         navigationController?.pushViewController(starWarsViewController, animated: true)
     }
 }

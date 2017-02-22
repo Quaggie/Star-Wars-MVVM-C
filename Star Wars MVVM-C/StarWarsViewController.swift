@@ -11,24 +11,23 @@ import SwifterSwift
 
 class StarWarsViewController: UIViewController {
     
-    var starWarsViewModel: StarWarsViewModel? {
-        didSet {
-            starWarsViewModel?.delegate = self
-        }
-    }
+    var starWarsViewModel: StarWarsViewModel?
+    var typeHeaderViewViewModel: TypeHeaderViewViewModel?
+    var typeHeaderViewViewModelTransitionDelegate: TypeHeaderViewViewModelTransitionDelegate?
     
     lazy var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
         flowLayout.sectionHeadersPinToVisibleBounds = true
-        flowLayout.minimumLineSpacing = 0
+        flowLayout.minimumLineSpacing = 8
         let cv = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         cv.dataSource = self
         cv.delegate = self
         cv.backgroundColor = .clear
         cv.bounces = true
-        cv.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
-        cv.register(cellWithClass: UICollectionViewCell.self)
+        cv.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 8, right: 0)
+        cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "alou")
+        cv.register(TypeHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: TypeHeaderView.reuseId)
         return cv
     }()
     
@@ -37,9 +36,16 @@ class StarWarsViewController: UIViewController {
         setupViews()
     }
     
-    convenience init (starWarsViewModel: StarWarsViewModel?) {
+    convenience init (starWarsViewModel: StarWarsViewModel?, typeHeaderViewViewModel: TypeHeaderViewViewModel?) {
         self.init()
         self.starWarsViewModel = starWarsViewModel
+        self.starWarsViewModel?.delegate = self
+        self.typeHeaderViewViewModel = typeHeaderViewViewModel
+    }
+    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        collectionView.collectionViewLayout.invalidateLayout()
+        typeHeaderViewViewModelTransitionDelegate?.willTransition(to: newCollection, with: coordinator)
     }
 }
 
@@ -69,9 +75,15 @@ extension StarWarsViewController: StarWarsViewModelDelegate {
     }
 }
 
+// MARK: TypeHeaderViewViewModelDelegate
+extension StarWarsViewController: TypeHeaderViewViewModelDelegate {
+    
+}
+
 // MARK: UICollectionViewDataSource
 extension StarWarsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         if let data = starWarsViewModel?.data as? StarWarsObject<Person> {
             return data.results?.count ?? 0
         }
@@ -117,6 +129,20 @@ extension StarWarsViewController: UICollectionViewDataSource {
         }
         return UICollectionViewCell()
     }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionElementKindSectionHeader:
+            if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: TypeHeaderView.reuseId, for: indexPath) as? TypeHeaderView {
+                // Adding the scroll delegate to the header
+                typeHeaderViewViewModelTransitionDelegate = headerView
+                headerView.viewModel = typeHeaderViewViewModel
+                return headerView
+            }
+        default: break
+        }
+        return UICollectionReusableView()
+    }
 }
 
 // MARK: UICollectionViewDelegate
@@ -129,7 +155,11 @@ extension StarWarsViewController: UICollectionViewDelegate {
 // MARK: UICollectionViewDelegateFlowLayout
 extension StarWarsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.size.width, height: 100)
+        return CGSize(width: view.width, height: 100)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: view.width, height: 70)
     }
 }
 

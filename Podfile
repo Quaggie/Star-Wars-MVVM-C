@@ -8,6 +8,7 @@ target 'Star Wars MVVM-C' do
   pod 'ObjectMapper', '~> 2.2'
   pod 'Moya-ObjectMapper'
   pod 'SwifterSwift'
+  pod 'Kingfisher', '~> 3.0'
 
   target 'Star Wars MVVM-CTests' do
     inherit! :search_paths

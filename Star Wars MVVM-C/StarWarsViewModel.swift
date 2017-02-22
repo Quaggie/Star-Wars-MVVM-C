@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class StarWarsViewModel {
     
@@ -57,7 +58,6 @@ class StarWarsViewModel {
             switch result {
             case .success(let starWarsObject):
                 if let starWarsObject = starWarsObject {
-                    print(starWarsObject)
                     self.data = starWarsObject
                 }
                 break

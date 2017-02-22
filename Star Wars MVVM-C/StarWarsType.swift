@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import UIKit
 
-enum StarWarsType {
+enum StarWarsType: String {
     case person
     case film
     case starship
