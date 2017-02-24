@@ -50,11 +50,11 @@ class StarWarsViewModel {
     
     init () {
         // Initialize the model?
-        fetchFilms()
+        fetchPeople()
     }
     
     func fetchFilms () {
-        Api.shared.fetchFilms { result in
+        Api.shared.fetchFilms(page: page) { result in
             switch result {
             case .success(let starWarsObject):
                 if let starWarsObject = starWarsObject {
@@ -65,6 +65,21 @@ class StarWarsViewModel {
                 // TODO: Show error
                 print(error)
                 break
+            }
+        }
+    }
+    
+    func fetchPeople () {
+        Api.shared.fetchPeople(page: page) { result in
+            switch result {
+            case .success(let starWarsObject):
+                if let starWarsObject = starWarsObject {
+                    self.data = starWarsObject
+                }
+                break
+            case .failure(let error):
+                // TODO: Show error
+                print(error)
             }
         }
     }

@@ -23,9 +23,6 @@ class TypeCell: UICollectionViewCell {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
         iv.tintColor = .darkGray
-        iv.clipsToBounds = true
-        iv.borderWidth = 3
-        iv.borderColor = .darkGray
         return iv
     }()
     
@@ -52,7 +49,6 @@ extension TypeCell: CodeBased {
         
         addSubview(imageView)
         imageView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: height)
-        imageView.cornerRadius = height / 2
     }
 }
 

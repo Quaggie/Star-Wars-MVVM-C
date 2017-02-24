@@ -32,4 +32,21 @@ struct Api {
             }
         }
     }
+    
+    func fetchPeople (page: Int = 1, provider: MoyaProvider<StarWarsService> = MoyaProvider<StarWarsService>(), completion: @escaping (StarWarsResult<Person>) -> Void) {
+        provider.request(.fetchPeople(page: page)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    if let starWarsObject = try? response.mapObject(StarWarsObject<Person>.self) {
+                        completion(StarWarsResult<Person>.success(starWarsObject))
+                    }
+                }
+                break
+            case .failure(let error):
+                completion(StarWarsResult<Person>.failure(error))
+                break
+            }
+        }
+    }
 }

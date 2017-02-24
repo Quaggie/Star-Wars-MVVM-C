@@ -19,14 +19,16 @@ class StarWarsViewController: UIViewController {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
         flowLayout.sectionHeadersPinToVisibleBounds = true
-        flowLayout.minimumLineSpacing = 8
+        flowLayout.minimumLineSpacing = 16
+        flowLayout.sectionInset = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
         let cv = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         cv.dataSource = self
         cv.delegate = self
         cv.backgroundColor = .clear
         cv.bounces = true
-        cv.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 8, right: 0)
-        cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "alou")
+        cv.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 16, right: 0)
+        cv.register(FilmCell.self, forCellWithReuseIdentifier: FilmCell.reuseId)
+        cv.register(PersonCell.self, forCellWithReuseIdentifier: PersonCell.reuseId)
         cv.register(TypeHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: TypeHeaderView.reuseId)
         return cv
     }()
@@ -52,7 +54,7 @@ class StarWarsViewController: UIViewController {
 // MARK: CodeBased
 extension StarWarsViewController: CodeBased {
     func setupViews() {
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(white: 0.5, alpha: 0.3)
         
         view.addSubview(collectionView)
         collectionView.fillToSuperview()
@@ -107,13 +109,20 @@ extension StarWarsViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let _ = starWarsViewModel?.data as? StarWarsObject<Person> {
+        if let starWarsObject = starWarsViewModel?.data as? StarWarsObject<Person> {
+            let person = starWarsObject.results?.item(at: indexPath.item)
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonCell.reuseId, for: indexPath) as? PersonCell {
+                cell.person = person
+                return cell
+            }
             
         }
-        if let _ = starWarsViewModel?.data as? StarWarsObject<Film> {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "alou", for: indexPath)
-            cell.backgroundColor = .black
-            return cell
+        if let starWarsObject = starWarsViewModel?.data as? StarWarsObject<Film> {
+            let film = starWarsObject.results?.item(at: indexPath.item)
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilmCell.reuseId, for: indexPath) as? FilmCell {
+                cell.film = film
+                return cell
+            }
         }
         if let _ = starWarsViewModel?.data as? StarWarsObject<Starship> {
             
@@ -159,7 +168,7 @@ extension StarWarsViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.width, height: 70)
+        return CGSize(width: view.width, height: 50)
     }
 }
 

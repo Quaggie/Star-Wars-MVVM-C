@@ -13,6 +13,8 @@
 		E00629871E5DD0880059BE07 /* TypeHeaderViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00629861E5DD0880059BE07 /* TypeHeaderViewViewModel.swift */; };
 		E00629891E5DD0E40059BE07 /* TypeHeaderViewViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00629881E5DD0E40059BE07 /* TypeHeaderViewViewModelDelegate.swift */; };
 		E006298B1E5DE4160059BE07 /* TypeHeaderViewViewModelTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E006298A1E5DE4160059BE07 /* TypeHeaderViewViewModelTransitionDelegate.swift */; };
+		E00B9E7C1E605BF000D27109 /* FilmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00B9E7B1E605BF000D27109 /* FilmCell.swift */; };
+		E00B9E7E1E6061A900D27109 /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00B9E7D1E6061A900D27109 /* PersonCell.swift */; };
 		E01589BA1E5B2BD50079DAFA /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01589B91E5B2BD50079DAFA /* Coordinator.swift */; };
 		E01589BC1E5B2CF50079DAFA /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01589BB1E5B2CF50079DAFA /* AppCoordinator.swift */; };
 		E038F7D61E5B178D00764B22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E038F7D51E5B178D00764B22 /* AppDelegate.swift */; };
@@ -62,6 +64,8 @@
 		E00629861E5DD0880059BE07 /* TypeHeaderViewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeHeaderViewViewModel.swift; sourceTree = "<group>"; };
 		E00629881E5DD0E40059BE07 /* TypeHeaderViewViewModelDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeHeaderViewViewModelDelegate.swift; sourceTree = "<group>"; };
 		E006298A1E5DE4160059BE07 /* TypeHeaderViewViewModelTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeHeaderViewViewModelTransitionDelegate.swift; sourceTree = "<group>"; };
+		E00B9E7B1E605BF000D27109 /* FilmCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilmCell.swift; sourceTree = "<group>"; };
+		E00B9E7D1E6061A900D27109 /* PersonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
 		E01589B91E5B2BD50079DAFA /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		E01589BB1E5B2CF50079DAFA /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		E01C78D51E5B202400081586 /* Alamofire */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Alamofire; path = Carthage/Checkouts/Alamofire; sourceTree = "<group>"; };
@@ -319,9 +323,11 @@
 		E0A77C661E5DBD1900A51ED1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E038F7D71E5B178D00764B22 /* StarWarsViewController.swift */,
 				E00629811E5DC7710059BE07 /* TypeHeaderView.swift */,
 				E0A77C691E5DBD8C00A51ED1 /* TypeCell.swift */,
-				E038F7D71E5B178D00764B22 /* StarWarsViewController.swift */,
+				E00B9E7D1E6061A900D27109 /* PersonCell.swift */,
+				E00B9E7B1E605BF000D27109 /* FilmCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -555,9 +561,11 @@
 				E08CE88A1E5C92310040DD2D /* StarWarsType.swift in Sources */,
 				E07684331E5B3477003F0E5B /* StarWarsViewModel.swift in Sources */,
 				E07684411E5B5C54003F0E5B /* StarWarsObject.swift in Sources */,
+				E00B9E7E1E6061A900D27109 /* PersonCell.swift in Sources */,
 				E08CE8881E5C7D290040DD2D /* URL+Extension.swift in Sources */,
 				E07684491E5B5E03003F0E5B /* Specie.swift in Sources */,
 				E08CE8911E5C9CB70040DD2D /* StarWarsModel.swift in Sources */,
+				E00B9E7C1E605BF000D27109 /* FilmCell.swift in Sources */,
 				E076844B1E5B5E1B003F0E5B /* Planet.swift in Sources */,
 				E038F7D81E5B178D00764B22 /* StarWarsViewController.swift in Sources */,
 				E08CE88C1E5C94CE0040DD2D /* CodeBased.swift in Sources */,
