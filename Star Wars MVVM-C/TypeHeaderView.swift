@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwifterSwift
 
 class TypeHeaderView: UICollectionReusableView {
     
@@ -109,7 +110,15 @@ extension TypeHeaderView: UICollectionViewDataSource {
 
 extension TypeHeaderView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath)
+        if let currentType = viewModel?.types.item(at: indexPath.row) {
+            if viewModel?.selectedType == currentType.type {
+                delegate?.scrollToTop()
+            } else {
+                // API call
+                delegate?.onTypeSelected(selectedType: currentType.type)
+            }
+            viewModel?.selectedType = currentType.type
+        }
     }
 }
 

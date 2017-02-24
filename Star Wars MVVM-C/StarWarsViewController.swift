@@ -79,7 +79,13 @@ extension StarWarsViewController: StarWarsViewModelDelegate {
 
 // MARK: TypeHeaderViewViewModelDelegate
 extension StarWarsViewController: TypeHeaderViewViewModelDelegate {
+    func scrollToTop() {
+        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+    }
     
+    func onTypeSelected(starWarsType: StarWarsType) {
+        print("Selected type \(starWarsType.rawValue)")
+    }
 }
 
 // MARK: UICollectionViewDataSource
@@ -146,6 +152,7 @@ extension StarWarsViewController: UICollectionViewDataSource {
                 // Adding the scroll delegate to the header
                 typeHeaderViewViewModelTransitionDelegate = headerView
                 headerView.viewModel = typeHeaderViewViewModel
+                headerView.delegate = self
                 return headerView
             }
         default: break

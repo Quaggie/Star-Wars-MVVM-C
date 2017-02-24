@@ -9,5 +9,6 @@
 import Foundation
 
 protocol TypeHeaderViewViewModelDelegate {
-    
+    func scrollToTop()
+    func onTypeSelected (selectedType: StarWarsType)
 }

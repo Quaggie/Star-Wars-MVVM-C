@@ -13,11 +13,6 @@ class StarWarsViewModel {
     
     var isSearching = false
     var page: Int = 1
-    var selectedType: StarWarsType = .person {
-        didSet {
-            delegate?.onTypeSelected(selectedType: selectedType)
-        }
-    }
     
     var data: Any? {
         didSet {

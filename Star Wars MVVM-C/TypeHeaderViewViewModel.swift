@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 class TypeHeaderViewViewModel: NSObject {
+    var selectedType: StarWarsType = .person
+    
     let types: [TypeModel] = [
         TypeModel(type: .person, image: #imageLiteral(resourceName: "icon_person")),
         TypeModel(type: .film, image: #imageLiteral(resourceName: "icon_film")),
